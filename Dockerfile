@@ -26,5 +26,5 @@ RUN sed -i "s/^exit 101$/exit 0/" /usr/sbin/policy-rc.d
 EXPOSE 8913
 
 #CMD cd pulsar
-CMD  . /pulsar/venv pulsar --daemon
+CMD  . /pulsar/venv/bin/activate pulsar --daemon
 
