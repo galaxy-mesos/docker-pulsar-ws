@@ -2,23 +2,25 @@
 
 # Download base image ubuntu 16.04
 FROM ubuntu:16.04
-
 # Define the ENV variable
 ENV container docker
 ARG DEBIAN_FRONTEND=noninteractive
-
 # Install pulsar
-RUN apt-get update
-RUN apt-get install -y apt-utils vim
-RUN apt-get install -y python-dev python-pip
-RUN apt-get install -y libffi-dev libssl-dev
+RUN apt-get update && \
+    apt-get install -y apt-utils \
+    vim \
+    python-dev \
+    python-pip \
+    libffi-dev \
+    libssl-dev
 RUN pip install --upgrade pip
 RUN pip install pyOpenSSL
 RUN pip install virtualenv
-RUN mkdir -p /pulsar
-RUN virtualenv /pulsar/venv
-RUN . /pulsar/venv/bin/activate; pip install pulsar-app; pulsar-config
-
+RUN mkdir -p /pulsar && \
+    virtualenv /pulsar/venv && \
+    . /pulsar/venv/bin/activate && \
+    pip install pulsar-app && \
+    pulsar-config --directory /pulsar
 # Avoid message: invoke-rc.d: policy-rc.d denied execution of start.
 RUN sed -i "s/^exit 101$/exit 0/" /usr/sbin/policy-rc.d
 
@@ -26,5 +28,5 @@ RUN sed -i "s/^exit 101$/exit 0/" /usr/sbin/policy-rc.d
 EXPOSE 8913
 
 #CMD cd pulsar
-CMD  . /pulsar/venv/bin/activate pulsar --daemon
-
+CMD  . /pulsar/venv/bin/activate && \
+      pulsar --daemon -c /pulsar
