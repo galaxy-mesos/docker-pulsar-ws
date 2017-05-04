@@ -29,4 +29,4 @@ EXPOSE 8913
 
 #CMD cd pulsar
 CMD  . /pulsar/venv/bin/activate && \
-      pulsar --daemon -c /pulsar
+      pulsar -c /pulsar --daemon
