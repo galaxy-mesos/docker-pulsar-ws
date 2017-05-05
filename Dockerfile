@@ -23,10 +23,7 @@ RUN mkdir -p /pulsar && \
     pulsar-config --directory /pulsar
 # Avoid message: invoke-rc.d: policy-rc.d denied execution of start.
 RUN sed -i "s/^exit 101$/exit 0/" /usr/sbin/policy-rc.d
-
 # Configure Port
 EXPOSE 8913
-
-#CMD cd pulsar
 CMD  . /pulsar/venv/bin/activate && \
-      pulsar -c /pulsar --daemon
+      pulsar -c /pulsar
