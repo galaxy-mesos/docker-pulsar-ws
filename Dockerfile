@@ -8,11 +8,12 @@ MAINTAINER mariangela.tomaiuolo@ba.infn.it
 # Define the ENV variable
 ENV container docker
 
-ARG DEBIAN_FRONTEND=noninteractive
+#ARG DEBIAN_FRONTEND=noninteractive
 
 # Install pulsar
 RUN apt-get update && \
     apt-get install -y apt-utils \
+    git \
     vim \
     python-dev \
     python-pip \
@@ -29,7 +30,7 @@ RUN pip install virtualenv
 
 #RUN mkdir -p /pulsar && \
 RUN virtualenv /pulsar/venv && \
-    . /pulsar/venv/bin/activate && \
+    . /pulsar/venv/bin/activate 
  #   pip install pulsar-app && \
  #   pulsar-config --directory /pulsar
 
