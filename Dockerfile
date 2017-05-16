@@ -8,7 +8,7 @@ MAINTAINER mariangela.tomaiuolo@ba.infn.it
 # Define the ENV variable
 ENV container docker
 
-ARG DEBIAN_FRONTEND=noninteractive
+#ARG DEBIAN_FRONTEND=noninteractive
 
 # Install pulsar
 RUN apt-get update && \
