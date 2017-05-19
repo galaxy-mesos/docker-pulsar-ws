@@ -21,15 +21,13 @@ RUN apt-get update && \
 
 RUN pip install --upgrade pip
 
-RUN pip install pyOpenSSL
-
 RUN pip install virtualenv
 
 RUN mkdir -p /pulsar && \
     virtualenv /pulsar/venv && \
     . /pulsar/venv/bin/activate && \
-    pip install pulsar-app \
-    pyOpenSSL && \
+    pip install pulsar-app && \
+    pyOpenSSL \
     pulsar-config --directory /pulsar
 
 # Avoid message: invoke-rc.d: policy-rc.d denied execution of start.
