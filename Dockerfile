@@ -27,7 +27,7 @@ RUN git clone https://github.com/galaxyproject/pulsar
 RUN pip install virtualenv
 
 RUN virtualenv /pulsar/venv && \
-    . /pulsar/venv/bin/activate 
+    . /pulsar/venv/bin/activate &&\
     pip install pyOpenSSL
 
 # Avoid message: invoke-rc.d: policy-rc.d denied execution of start.
