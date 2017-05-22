@@ -22,7 +22,7 @@ RUN apt-get update && \
 
 RUN pip install --upgrade pip
 
-RUN git clone https://github.com/galaxyproject/pulsar
+RUN git clone https://github.com/galaxyproject/pulsar.git /pulsar
 
 RUN pip install virtualenv
 
