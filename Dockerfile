@@ -26,9 +26,13 @@ RUN git clone https://github.com/galaxyproject/pulsar.git /pulsar
 
 RUN pip install virtualenv
 
-RUN virtualenv /pulsar/venv && \
-    . /pulsar/venv/bin/activate &&\
+RUN virtualenv /pulsar/.venv && \
+    . /pulsar/.venv/bin/activate &&\
+    pip install -r /pulsar/requirements.txt &&\
     pip install pyOpenSSL
+
+RUN cp /pulsar/server.ini.sample /pulsar/server.ini &&\
+    cp /pulsar/app.yml.sample /pulsar/app.yml
 
 # Avoid message: invoke-rc.d: policy-rc.d denied execution of start.
 RUN sed -i "s/^exit 101$/exit 0/" /usr/sbin/policy-rc.d
@@ -36,5 +40,4 @@ RUN sed -i "s/^exit 101$/exit 0/" /usr/sbin/policy-rc.d
 # Configure Port
 EXPOSE 8913
 
-CMD  . /pulsar/venv/bin/activate && \
-      pulsar -c /pulsar
+CMD . /pulsar/.venv/bin/activate && cd /pulsar && ./run.sh
