@@ -29,8 +29,9 @@ RUN mkdir -p /pulsar && \
     pip install pyOpenSSL
 
 RUN . /pulsar/venv/bin/activate && \
-    pip install pulsar-app && \
-    pulsar-config --directory /pulsar
+    pip install pulsar-app
+
+RUN . /pulsar/venv/bin/activate && cd /pulsar && pulsar-config
 
 # Avoid message: invoke-rc.d: policy-rc.d denied execution of start.
 RUN sed -i "s/^exit 101$/exit 0/" /usr/sbin/policy-rc.d
@@ -38,6 +39,5 @@ RUN sed -i "s/^exit 101$/exit 0/" /usr/sbin/policy-rc.d
 # Configure Port
 EXPOSE 8913
 
-CMD  . /pulsar/venv/bin/activate && \
-      pulsar -c /pulsar
+CMD  . /pulsar/venv/bin/activate && cd /pulsar && pulsar
 
